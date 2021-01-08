@@ -28,7 +28,7 @@ struct student
 // function prototypes
 void addNewStudent();
 void displayStudent();
-void removeStudent()
+void removeStudent();
 void editStudent();
 void displayAll();
 
