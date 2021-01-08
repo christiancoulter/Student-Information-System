@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Student
+{
+    private:
+        string name;
+        int uid, dob;
+    public:
+}
+
+
+int main()
+{
+    int choice;
+
+    cout << "Press 1 to Add New Student" << endl;
+    cout << "Press 2 to Display All Students" << endl;
+    cout << "Press 3 to Remove Student" << endl;
+    cout << "Press 4 to Edit Student" << endl;
+    cout << "Press 5 to Search Student" << endl;
+    cout << "Press 0 to Exit" << endl;
+
+    cout << "Enter a choice: ";
+    cin >> choice;
+ 
+    return 0;
+}
