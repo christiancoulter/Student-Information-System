@@ -68,7 +68,7 @@ int main()
         // switch-case to execute proper menu choice
         switch (choice) {
             case 49:
-                addNewStudent();
+                addNewStudent(fileName);
                 break;
             case 50:
                 //displayStudent();
@@ -89,4 +89,104 @@ int main()
 
     // successful termination
     return 0;
+}
+
+void addNewStudent(string fileName)
+{
+    fstream dataFile (fileName, ios::out | ios::binary | ios::app);
+
+    if (!dataFile)
+    {
+        cout << "Error opening file. Try again." << endl;
+        exit(0);
+    }
+
+    student S;
+
+    cout << "Enter student name: ";
+    cin.getline(S.name, 51);
+
+    while (strlen(S.name) < 1)
+    {
+        cout << "Name cannot be left blank!" << endl;
+        cin.getline(S.name, 51);
+    }
+
+    cout << "Enter student ID: ";
+    cin.getline(S.registration, 8);
+
+    while (strlen(S.registration) < 1)
+    {
+        cout << "Student ID cannot be left blank!" << endl;
+        cin.getline(S.registration, 8);
+    }
+
+    cout << "Enter student major: ";
+    cin.getline(S.major, 51);
+
+    while (strlen(S.major) < 1)
+    {
+        cout << "Major cannot be left blank!" << endl;
+        cin.getline(S.major, 51);
+    }
+
+    cout << "Enter student street address: ";
+    cin.getline(S.address1, 51);
+
+    while (strlen(S.address1) < 1)
+    {
+        cout << "Street address cannot be left blank!" << endl;
+        cin.getline(S.address1, 51);
+    }
+
+    cout << "Enter student city, state, and zipcode: ";
+    cin.getline(S.address2, 51);
+
+    while (strlen(S.address2) < 1)
+    {
+        cout << "City, state, and zipcode cannot be left blank!" << endl;
+        cin.getline(S.address2, 51);
+    }
+
+    cout << "Enter student phone number in format (XXX)XXX-XXXX: ";
+    cin.getline(S.phone, 14);
+
+    /*
+    while (strlen(S.phone) < 1)
+    {
+        cout << "Phone cannot be left blank!" << endl;
+        cin.getline(S.phone, 14);
+    }
+    */
+
+    cout << "Enter student GPA: ";
+    cin >> S.gpa;
+    
+    while (S.gpa < 0)
+    {
+        cout << "GPA cannot be negative!" << endl;
+        cin >> S.gpa;
+    }
+
+    cout << "Enter student DOB in format DD//MM/YYYY: ";
+    cin.getline(S.dob, 11);
+
+    /*
+    while (strlen(S.name) < 1)
+    {
+        cout << "Name cannot be left blank!" << endl;
+        cin.getline(S.name, 51);
+    }
+    */
+
+    cout << "Now writing to file..." << endl;
+
+    dataFile.write(reinterpret_cast<char *>(&S), sizeof(S));
+
+    cout << "Successful!" << endl;
+
+    dataFile.close();
+
+
+
 }
