@@ -26,14 +26,19 @@ struct student
 };
 
 // function prototypes
-void addNewStudent();
-void displayStudent();
-void removeStudent();
-void editStudent();
-void displayAll();
+void addNewStudent(string);
+//void displayStudent();
+//void removeStudent();
+//void editStudent();
+//void displayAll();
 
 int main()
 {
+    
+    string fileName;
+    fileName = "students.txt";
+
+
     // variable to store user's menu choice
     char choice;
 
@@ -66,16 +71,16 @@ int main()
                 addNewStudent();
                 break;
             case 50:
-                displayStudent();
+                //displayStudent();
                 break;
             case 51:
-                removeStudent();
+                //removeStudent();
                 break;
             case 52:
-                editStudent();
+                //editStudent();
                 break;
             case 53:
-                displayAll();
+                //displayAll();
                 break;
             case 54:
                 break;
