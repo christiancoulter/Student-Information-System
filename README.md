@@ -1,9 +1,5 @@
 # SIS - Student Information System
 
-![GitHub repo size](https://img.shields.io/github/repo-size/christiancoulter/Student-Information-System)
-![GitHub stars](https://img.shields.io/github/stars/christiancoulter/Student-Information-System)
-![GitHub forks](https://img.shields.io/github/forks/christiancoulter/Student-Information-System)
-
 SIS is a C++ command line tool that allows a University's faculty/staff to do view and change student information.
 
 ## Prerequisites
