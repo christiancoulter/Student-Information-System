@@ -27,7 +27,7 @@ struct student
 
 // function prototypes
 void addNewStudent(string);
-//void displayStudent();
+void displayStudent(string);
 //void removeStudent();
 //void editStudent();
 //void displayAll();
@@ -71,7 +71,7 @@ int main()
                 addNewStudent(fileName);
                 break;
             case 50:
-                //displayStudent();
+                displayStudent(fileName);
                 break;
             case 51:
                 //removeStudent();
@@ -186,7 +186,55 @@ void addNewStudent(string fileName)
     cout << "Successful!" << endl;
 
     dataFile.close();
+}
 
+void displayStudent(string fileName)
+{
+    fstream dataFile(fileName, ios::in | ios::binary);
 
+    if (!dataFile)
+    {
+        cout << "Error opening file. Try again." << endl;
+        exit(0);
+    }
+
+    // temporary struct to store data
+    student temp;
+
+    // array to store student's name to search
+    char searchName[51];
+
+    // prompt user to enter name to be searched
+    cout << "Enter name of student to search: " << endl;
+    cin.getline(searchName, 51);
+
+    // move read position to beginning of the file
+    dataFile.read(0, ios::beg);
+
+    // read first record
+    dataFile.read(reinterpret_cast <char *>(&temp), sizeof(temp));
+
+    while (!dataFile.eof())
+    {
+        if (strcmp(temp.name, searchName) == 0)
+        {
+            cout << "Record found! " << endl;
+            // display record
+            dataFile.close();
+            return;
+        }
+        else
+        {
+            dataFile.read(reinterpret_cast <char *>(&temp), sizeof(temp));
+        }
+    }
+    // display error if no record found
+    if (dataFile.eof())
+    {
+        cout << "No record found for " << searchName << "!" << endl;
+    }
+
+    // close file
+    dataFile.close();
 
 }
