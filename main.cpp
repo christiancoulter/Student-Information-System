@@ -151,13 +151,15 @@ void addNewStudent(string fileName)
     cout << "Enter student phone number in format (XXX)XXX-XXXX: ";
     cin.getline(S.phone, 14);
 
-    /*
+    
     while (strlen(S.phone) < 1)
     {
-        cout << "Phone cannot be left blank!" << endl;
+        cout << "Enter a valid phone number!" << endl;
         cin.getline(S.phone, 14);
     }
-    */
+    
+   cin.clear();
+   cin.ignore(5, '\n');
 
     cout << "Enter student GPA: ";
     cin >> S.gpa;
@@ -167,17 +169,20 @@ void addNewStudent(string fileName)
         cout << "GPA cannot be negative!" << endl;
         cin >> S.gpa;
     }
+    cin.ignore();
 
     cout << "Enter student DOB in format DD//MM/YYYY: ";
     cin.getline(S.dob, 11);
 
-    /*
-    while (strlen(S.name) < 1)
+    
+    while (strlen(S.dob) < 1)
     {
-        cout << "Name cannot be left blank!" << endl;
-        cin.getline(S.name, 51);
+        cout << "Enter a valid date of birth!" << endl;
+        cin.getline(S.dob, 51);
     }
-    */
+    
+    cin.clear();
+    cin.ignore(5, '\n');
 
     cout << "Now writing to file..." << endl;
 
@@ -236,5 +241,4 @@ void displayStudent(string fileName)
 
     // close file
     dataFile.close();
-
 }
