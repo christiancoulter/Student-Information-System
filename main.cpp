@@ -31,13 +31,15 @@ void displayStudent(string);
 //void removeStudent();
 //void editStudent();
 //void displayAll();
+void displayRecord(student);
+bool validatePhone(char []);
+bool validateDOB(char []);
+
 
 int main()
 {
-    
     string fileName;
     fileName = "students.txt";
-
 
     // variable to store user's menu choice
     char choice;
@@ -152,7 +154,7 @@ void addNewStudent(string fileName)
     cin.getline(S.phone, 14);
 
     
-    while (strlen(S.phone) < 1)
+    while (!validatePhone(S.phone))
     {
         cout << "Enter a valid phone number!" << endl;
         cin.getline(S.phone, 14);
@@ -175,7 +177,7 @@ void addNewStudent(string fileName)
     cin.getline(S.dob, 11);
 
     
-    while (strlen(S.dob) < 1)
+    while (!validateDOB(S.dob))
     {
         cout << "Enter a valid date of birth!" << endl;
         cin.getline(S.dob, 51);
@@ -214,10 +216,10 @@ void displayStudent(string fileName)
     cin.getline(searchName, 51);
 
     // move read position to beginning of the file
-    dataFile.read(0, ios::beg);
+    dataFile.seekg(0L, ios::beg);
 
     // read first record
-    dataFile.read(reinterpret_cast <char *>(&temp), sizeof(temp));
+    dataFile.read(reinterpret_cast<char *>(&temp), sizeof(temp));
 
     while (!dataFile.eof())
     {
@@ -225,6 +227,7 @@ void displayStudent(string fileName)
         {
             cout << "Record found! " << endl;
             // display record
+            displayRecord(temp);
             dataFile.close();
             return;
         }
@@ -241,4 +244,79 @@ void displayStudent(string fileName)
 
     // close file
     dataFile.close();
+}
+
+
+bool validateDOB(char date[11]){
+    //check separators
+    if(date[2] != '/' || date[5] != '/')
+        return false;
+
+    //check for length
+    if(strlen(date) != 10)
+        return false;
+
+    //convert the char array to numbers accessing relevant indexes
+    int day = (date[0]-'0')*10 + (date[1]-'0');
+    int month = (date[3]-'0')*10 + (date[4]-'0');
+    int year = (date[6]-'0')*1000 + (date[7]-'0')*100
+                + (date[8]-'0')*10 + (date[9]-'0');
+
+    //validate for day, month then year
+    if(day < 1 || day > 31)
+        return false;
+    else if(month < 1 || month > 12)
+        return false;
+
+    return true;
+}
+
+
+//function for phone number validation
+bool validatePhone(char phone[]){
+    //check for length
+    if(strlen(phone) != 13)
+        return false;
+
+    //format is (XXX)XXX-XXXX
+    //check for separators
+    else if(phone[0] != '(' || phone[4] != ')' || phone[8] != '-')
+        return false;
+
+    //validate for any char that is not digit
+    for(int counter = 0; counter < 13; counter++){
+        //disregard the separators located at
+        //indexes 0, 4 and 8
+        if(counter == 0 || counter == 4 || counter == 8)
+            continue;
+        else{
+            //check if it's not a digit
+            if(!isdigit(phone[counter]))
+                return false;
+        }
+    }
+    
+    //otherwise, if all above have failed
+    //means that date is input ok, return true
+    return true;
+}
+
+void displayRecord(student S){
+    //display each field along with the information
+    cout << "\nStudent Name: ";
+    cout << S.name << endl;
+    cout << "Student Registration Number: ";
+    cout << S.registration << endl;
+    cout << "Student major: ";
+    cout << S.major << endl;
+    cout << "Student street address: ";
+    cout << S.address1 << endl;
+    cout << "Student city, state and ZIP: ";
+    cout << S.address2 << endl;
+    cout << "Student phone number: ";
+    cout << S.phone << endl;
+    cout << "Customer balance: ";
+    cout << S.gpa << endl;
+    cout << "Student birth date: ";
+    cout << S.dob << endl;
 }
