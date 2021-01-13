@@ -6,8 +6,8 @@ SIS is a C++ command line tool that allows a University's faculty/staff to do vi
 
 Before you begin, ensure you have met the following requirements:
 
-* MinGW downloaded for running in command line on windows
-* Download the main.cpp file to your desired location
+* C++ compiler installed on your machine
+* Download the main.cpp and students.txt file to your desired location
 
 ## Installing <project_name>
 
@@ -15,7 +15,8 @@ To install <project_name>, follow these steps:
 
 Linux and macOS:
 ```
-<install_command>
+g++ -o main main.cpp
+./main
 ```
 
 Windows:
@@ -27,12 +28,11 @@ main.exe
 ## Using <project_name>
 
 To use SIS, follow these steps:
-
 ```
-<usage_example>
+* select your choice from the menu
+* if entering a new student, the information will be stored in the .txt file
+* the program will run until quit
 ```
-
-Add run commands and examples you think users will find useful. Provide an options reference for bonus points!
 
 ## Contact
 
